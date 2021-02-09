@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // import form components
-import { TextInput } from '../../../global/components/forms';
+import { TextAreaInput } from '../../../global/components/forms';
 
 const  NoteForm = ({
-  cancelLink
+  cancelAction
+  , cancelLink
   , formHelpers
   , formTitle
   , formType
@@ -32,17 +33,20 @@ const  NoteForm = ({
         <div className="form-container -slim">
           <form name="noteForm" className="note-form" onSubmit={handleFormSubmit}>
             {header}
-            <TextInput
+            <TextAreaInput
               change={handleFormChange}
-              label="Name"
-              name="note.name"
-              placeholder="Name (required)"
+              label="Note content"
+              name="note.content"
               required={true}
-              value={note.name}
+              value={note.content}
             />
             <div className="input-group">
               <div className="yt-row space-between">
-                <Link className="yt-btn link" to={cancelLink}>Cancel</Link>
+                { !cancelAction ?
+                  <Link className="yt-btn link" to={cancelLink}>Cancel</Link>
+                  :
+                  <button className="yt-btn link" onClick={cancelAction}>Cancel</button>
+                }
                 <button className="yt-btn " type="submit" > {buttonText} </button>
               </div>
             </div>
@@ -54,7 +58,8 @@ const  NoteForm = ({
 }
 
 NoteForm.propTypes = {
-  cancelLink: PropTypes.string.isRequired
+  cancelAction: PropTypes.func
+  , cancelLink: PropTypes.string
   , formHelpers: PropTypes.object
   , formTitle: PropTypes.string
   , formType: PropTypes.string.isRequired
@@ -64,7 +69,8 @@ NoteForm.propTypes = {
 }
 
 NoteForm.defaultProps = {
-  formHelpers: {}
+  cancelLink: '/notes'
+  , formHelpers: {}
   , formTitle: ''
 }
 

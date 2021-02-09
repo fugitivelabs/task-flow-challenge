@@ -8,7 +8,7 @@ const TaskListItem = ({
 }) => {
   return (
     <li>
-      <Link to={`/tasks/${task._id}`}> {task.name}</Link>
+      <Link to={`/tasks/${task._id}`}><strong>{task.name}</strong></Link>
     </li>
   )
 }
