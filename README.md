@@ -40,7 +40,7 @@ Yote should always be the most comprehensive and flexible stack available. Right
   * [Mongo](http://www.mongodb.org/)
   * [Mongoose](http://mongoosejs.com/)
 - **Server/API**
-  * [Node](https://nodejs.org/)
+  * [Node](https://nodejs.org/) -- Version 10
   * [Express](http://expressjs.com/)
   * [Passport](http://passportjs.org/)
   * [Docker](https://www.docker.com/)
