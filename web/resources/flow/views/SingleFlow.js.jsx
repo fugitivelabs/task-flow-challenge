@@ -203,6 +203,7 @@ class SingleFlow extends Binder {
             <h1> { selectedFlow.name }
             </h1>
             <p> { selectedFlow.description }</p>
+            <h1> { selectedFlow.department }</h1>
             <Link className="yt-btn x-small bordered" to={`${this.props.match.url}/update`}> Edit Flow</Link>
             <hr/>
             { isTaskListEmpty ?

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { 
   TextAreaInput 
   , TextInput 
+  , SelectFromArray
 } from '../../../global/components/forms';
 
 const  FlowForm = ({
@@ -20,6 +21,7 @@ const  FlowForm = ({
   , formType
   , handleFormChange
   , handleFormSubmit
+  , onSelectChange
   , flow
 }) => {
 
@@ -28,6 +30,8 @@ const  FlowForm = ({
 
   // set the form header
   const header = formTitle ? <div className="formHeader"><h2> {formTitle} </h2><hr/></div> : <div/>;
+
+  const department = ["Accounting", "IT", "Sales", "Human Resources", "Administration"];
 
   return (
     <div className="yt-container">
@@ -42,6 +46,15 @@ const  FlowForm = ({
               placeholder="Name (required)"
               required={true}
               value={flow.name}
+            />
+            <SelectFromArray
+              items={department}
+              label="Department"
+              change={onSelectChange}
+              multiple={true}
+              value="accounting"
+              type="select-multiple"
+              placeholder="-- Which department does this flow belong to? -- "
             />
              <TextAreaInput
               change={handleFormChange}
@@ -71,6 +84,7 @@ FlowForm.propTypes = {
   , formType: PropTypes.string.isRequired
   , handleFormChange: PropTypes.func.isRequired
   , handleFormSubmit: PropTypes.func.isRequired
+  , onSelectChange: PropTypes.func.isRequired
   , flow: PropTypes.object.isRequired
 }
 

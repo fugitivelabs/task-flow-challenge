@@ -57,7 +57,7 @@ class AdminTopNav extends Binder {
     let { loggedInUser } = this.props;
     let { profileOpen } = this.state;
 
-    let pictureUrl = '/img/defaults/profile.png';
+    let pictureUrl = '/img/defaults/jane.jpg';
     if(loggedInUser && loggedInUser.profilePicUrl) {
       pictureUrl = loggedInUser.profilePicUrl;
     }
