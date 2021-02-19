@@ -22,6 +22,7 @@ const flowSchema = mongoose.Schema({
   // specific values for flow go below
   , name:                   { type: String, required: '{PATH} is required!' }
   , description:            { type: String }
+  , department:              { type: String, enum: ["accounting", "it", "sales", "human resources", "administration"], default: "accounting" } 
 });
 
 // flow instance methods go here

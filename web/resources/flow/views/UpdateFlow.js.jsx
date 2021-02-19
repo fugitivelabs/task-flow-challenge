@@ -41,6 +41,7 @@ class UpdateFlow extends Binder {
     this._bind(
       '_handleFormChange'
       , '_handleFormSubmit'
+      , '_onSelectChange'
     );
   }
 
@@ -76,6 +77,10 @@ class UpdateFlow extends Binder {
     });
   }
 
+  _onSelectChange(event) {
+    this.setState({value: event.target.value});
+  }
+
   render() {
     const {
       location
@@ -109,6 +114,7 @@ class UpdateFlow extends Binder {
             formType="update"
             handleFormChange={this._handleFormChange}
             handleFormSubmit={this._handleFormSubmit}
+            onSelectChange={this._onSelectChange}
           />
         }
       </FlowLayout>
