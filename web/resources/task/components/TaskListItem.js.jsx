@@ -3,13 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+// import other libraries
+import { DateTime } from 'luxon';
+
 const TaskListItem = ({
   task
 }) => {
   return (
-    <li>
-      <Link to={`/tasks/${task._id}`}><strong>{task.name}</strong></Link>
-    </li>
+    <tr>
+      <td><Link to={`/tasks/${task._id}`}> {task.name}</Link></td>
+      <td className="numbers">{DateTime.fromISO(task.updated).toLocaleString(DateTime.DATETIME_SHORT)}</td>
+      <td className="numbers">{DateTime.fromISO(task.created).toLocaleString(DateTime.DATETIME_SHORT)}</td>
+    </tr>
   )
 }
 

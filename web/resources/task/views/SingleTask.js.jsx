@@ -159,14 +159,26 @@ class SingleTask extends Binder {
               :
               <div style={{ opacity: isNoteListFetching ? 0.5 : 1 }}>
                 <h4>Task notes</h4>
-                <ul>
-                  {noteListItems.map((note, i) =>
-                    <NoteListItem
-                      key={note._id + i}
-                      note={note}
-                    />
-                  )}
-                </ul>
+                <div className="table-wrapper">
+                  <table className="yt-table striped">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th className="numbers">Last Modified</th>
+                        <th className="numbers">Created</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {noteListItems.map((note, i) =>
+                        <NoteListItem
+                          key={note._id + i}
+                          note={note}
+                          className="numbers"
+                        />
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             }
             { !isNewNoteEmpty && showNoteForm ?
