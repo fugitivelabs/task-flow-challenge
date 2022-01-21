@@ -22,6 +22,7 @@ const flowSchema = mongoose.Schema({
   // specific values for flow go below
   , name:                   { type: String, required: '{PATH} is required!' }
   , description:            { type: String }
+  , _user:                  { type: ObjectId, ref: 'User', required: '{PATH} is required!' }
 });
 
 // flow instance methods go here
