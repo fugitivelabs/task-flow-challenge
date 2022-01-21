@@ -79,11 +79,22 @@ class TaskList extends Binder {
           (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           :
           <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <ul>
-              {taskListItems.map((task, i) =>
-                <TaskListItem key={task._id + i} task={task} />
-              )}
-            </ul>
+            <div className="table-wrapper">
+              <table className="yt-table striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th className="numbers">Last Modified</th>
+                    <th className="numbers">Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {taskListItems.map((task, i) =>
+                    <TaskListItem key={task._id + i} task={task} />
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         }
       </TaskLayout>

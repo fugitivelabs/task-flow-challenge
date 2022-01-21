@@ -86,7 +86,8 @@ class TaskList extends Binder {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Last modified</th>
+                    <th className="numbers">Last modified</th>
+                    <th className="numbers">Created</th>
                     <th></th>
                   </tr>
                 </thead>

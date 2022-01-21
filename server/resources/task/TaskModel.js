@@ -25,7 +25,7 @@ const taskSchema = mongoose.Schema({
   , name:                   { type: String, required: '{PATH} is required!' }
   , complete:               { type: Boolean, default: false }
   , status:                 { type: String, enum: ["approved", "awaiting_approval", "open"], default: "open" }
-
+  , _user:                  { type: ObjectId, ref: 'User', required: '{PATH} is required!' }
 });
 
 // task instance methods go here

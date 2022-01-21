@@ -79,11 +79,22 @@ class FlowList extends Binder {
           (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           :
           <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <ul>
-              {flowListItems.map((flow, i) =>
-                <FlowListItem key={flow._id + i} flow={flow} />
-              )}
-            </ul>
+            <div className="table-wrapper">
+              <table className="yt-table striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th className="numbers">Last Modified</th>
+                    <th className="numbers">Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {flowListItems.map((flow, i) =>
+                    <FlowListItem key={flow._id + i} flow={flow} />
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         }
       </FlowLayout>
@@ -102,6 +113,7 @@ const mapStoreToProps = (store) => {
   */
   return {
     flowStore: store.flow
+    , user: store.user.loggedIn.user
   }
 }
 

@@ -26,6 +26,8 @@ import NoteListItem from '../../note/components/NoteListItem.js.jsx';
 import TaskForm from '../../task/components/TaskForm.js.jsx';
 import TaskListItem from '../../task/components/TaskListItem.js.jsx';
 
+import _ from 'lodash';
+
 class SingleFlow extends Binder {
   constructor(props) {
     super(props);
@@ -98,9 +100,10 @@ class SingleFlow extends Binder {
 
   _handleTaskSubmit(e) {
     e.preventDefault();
-    const { defaultTask, dispatch, match } = this.props;
+    const { defaultTask, dispatch, match, loggedInUser } = this.props;
     let newTask = {...this.state.task}
     newTask._flow = match.params.flowId;
+    newTask._user = loggedInUser._id;
     dispatch(taskActions.sendCreateTask(newTask)).then(taskRes => {
       if(taskRes.success) {
         dispatch(taskActions.invalidateList('_flow', match.params.flowId));
@@ -178,7 +181,8 @@ class SingleFlow extends Binder {
      * to the actual note objetcs
      */
     const noteListItems = noteStore.util.getList("_flow", match.params.flowId);
-  
+    const noteListItemsSorted = _.orderBy(noteListItems, 'created', 'desc');
+
     const isNoteListEmpty = (
       !noteListItems
       || !noteList
@@ -210,14 +214,25 @@ class SingleFlow extends Binder {
               :
               <div style={{ opacity: isTaskListFetching ? 0.5 : 1 }}>
                 <h4>Task items</h4>
-                <ul>
-                  {taskListItems.map((task, i) =>
-                    <TaskListItem
-                      key={task._id + i}
-                      task={task}
-                    />
-                  )}
-                </ul>
+                <div className="table-wrapper">
+                  <table className="yt-table striped">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th className="numbers">Last Modified</th>
+                        <th className="numbers">Created</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {taskListItems.map((task, i) =>
+                      <TaskListItem
+                        key={task._id + i}
+                        task={task}
+                       />
+                     )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             }
             { !isNewTaskEmpty && showTaskForm ?
@@ -241,14 +256,26 @@ class SingleFlow extends Binder {
               :
               <div style={{ opacity: isNoteListFetching ? 0.5 : 1 }}>
                 <h4>Flow notes</h4>
-                <ul>
-                  {noteListItems.map((note, i) =>
-                    <NoteListItem
-                      key={note._id + i}
-                      note={note}
-                    />
-                  )}
-                </ul>
+                <div className="table-wrapper">
+                  <table className="yt-table striped">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th className="numbers">Last Modified</th>
+                        <th className="numbers">Created</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {noteListItemsSorted.map((note, i) =>
+                      <NoteListItem
+                        key={note._id + i}
+                        note={note}
+                        className="numbers"
+                        />
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             }
             { !isNewNoteEmpty && showNoteForm ?
